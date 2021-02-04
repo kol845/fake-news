@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 
 const Headline = props => {
   const { title, children, theme } = props;
-
   return (
     <React.Fragment>
-      {title ? <h1>{title}</h1> : <h1>{children}</h1>}
+      <h1>{title}</h1>
 
       {/* --- STYLES --- */}
       <style jsx>{`
@@ -16,7 +15,7 @@ const Headline = props => {
           animation-name: headlineEntry;
           animation-duration: 0;
           color: ${theme.color.neutral.gray.j};
-
+          
           :global(span) {
             font-weight: ${theme.font.weight.standard};
             display: block;
@@ -56,10 +55,5 @@ const Headline = props => {
   );
 };
 
-Headline.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.node,
-  theme: PropTypes.object.isRequired
-};
 
 export default Headline;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import "prismjs/themes/prism-okaidia.css";
 import Headline from "../Article/Headline";
@@ -9,41 +9,38 @@ import NextPrev from "./NextPrev";
 
 const Post = props => {
   const {
-    post,
-    post: {
-      html,
-      htmlAst,
-      fields: { prefix, slug },
-      frontmatter: { title, author, tags },
-      parent: { modifiedTime }
-    },
-    authornote,
-    next: nextPost,
-    prev: prevPost,
+    page,
     theme
   } = props;
 
+  useEffect(() => { // Scroll to top of article page on render
+    console.log("POST RENDERED...")
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <React.Fragment>
+    <div className="post-wrapper">
       <header>
-        <Headline title={title} theme={theme} />
-        <Meta prefix={prefix} lastEdit={modifiedTime} author={author} tags={tags} theme={theme} />
-      </header>
-      <Bodytext content={post} theme={theme} />
-      <footer>
-         {/*<Author note={authornote} theme={theme} /> */}
-         <NextPrev next={nextPost} prev={prevPost} theme={theme} />
-      </footer>
+          <Headline title={page.headline} theme={theme} />
+          <Meta prefix={page.date} lastEdit={page.date} author="AUTHOR NAME HERE PLEASE" tags={page.tags} theme={theme} />
+        </header>
+        <Bodytext content={page} theme={theme} />
+        {/* <footer>
+          <NextPrev next={nextPost} prev={prevPost} theme={theme} />
+        </footer> */}
+    </div>
+
+      <style jsx>{`
+        .post-wrapper {
+          margin:100px auto;
+          width:700px;
+        }
+      `}</style>
     </React.Fragment>
   );
 };
 
-Post.propTypes = {
-  post: PropTypes.object.isRequired,
-  authornote: PropTypes.string.isRequired,
-  next: PropTypes.object,
-  prev: PropTypes.object,
-  theme: PropTypes.object.isRequired
-};
+
 
 export default Post;

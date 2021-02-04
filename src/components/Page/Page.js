@@ -1,25 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+
 
 import Headline from "../Article/Headline";
 import Bodytext from "../Article/Bodytext";
 
 const Page = props => {
-  const {
-    page,
-    page: {
-      html,
-      frontmatter: { title }
-    },
-    theme
-  } = props;
+  useEffect(() => {
+    console.log("PAGE LOADED...")
+    console.log(props)
+  })
 
   return (
     <React.Fragment>
       <header>
-        <Headline title={title} theme={theme} />
+        <Headline title={props.page.headline} theme={props.theme} />
       </header>
-      <Bodytext content={page} theme={theme} />
+      <Bodytext content={props.page} theme={props.theme} />
     </React.Fragment>
   );
 };

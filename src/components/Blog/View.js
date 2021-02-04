@@ -1,69 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaCog } from "react-icons/fa/";
-import Hero from "../Hero";
 import Blog from "./Blog.js";
-import Pagination from "./Pagination";
-import { InfiniteScroll } from "./InfiniteScroll";
 
 /** Template for "home" page with infinite scroll and fallback to pagination. */
-class View extends React.Component {
+const View = props => {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => { // Like componentDidMount()
+        console.log("VIEW MOUNTING...")
+        setMounted(true);
+        window.scrollTo(0,1) // IF I REMOVE THIS THEN SCROLL WILL BE BUGGY. WHY IS THIS THE CASE REACT!?!?
+        window.requestAnimationFrame(function() {
+          window.scrollTo(0,localStorage.getItem("homeYScroll"))
+        });
+        return () => { // Like componentWillUnmount()
+            console.log("VIEW UNMOUNTING...")
+            localStorage.setItem("homeYScroll",window.scrollY);
+        }
+      }, []);
+    useEffect(() => { // Like componentDidUpdate()
+        console.log("VIEW UPDATED...")
+        if(mounted){
+            window.scrollTo(0,1) // IF I REMOVE THIS THEN SCROLL WILL BE BUGGY. WHY IS THIS THE CASE REACT!?!?
+            window.requestAnimationFrame(function() {
+              window.scrollTo(0,localStorage.getItem("homeYScroll"))
+            });
+        }
+    });
+        
 
-  constructor(props) {
-    super(props)
-    if (props.globalState.isInitializing() || !props.globalState.useInfiniteScroll) {
-        props.globalState.updateState({
-            items: props.pageContext.initialPosts,
-            cursor: props.pageContext.currentPage+1
-        })
-    }
-  }
 
-  render() {
+    // console.log("VIEW SAYS:")
+    // console.log(window.scrollY)
+    const theme = props.theme
+    const items = props.items;
+    return(
 
-    const g = this.props.globalState
-    const pageContext = this.props.pageContext
-    const theme = this.props.theme
-    const items = (!g.isInitializing() ? g.items : pageContext.initialPosts)
-
-    return (
+        
+            
         <React.Fragment>
 
-            {/* Optional Hero section on first page. */}
-            {pageContext.currentPage == 1 && !theme.hero.hide && (
-                <Hero theme={theme} />
-            )} 
 
             {/* Blog posts with infinite scroll. */}
-            <InfiniteScroll
-                throttle={300}
-                threshold={600}
-                isLoading={g.isLoading}
-                hasMore={g.hasMore(pageContext)}
-                onLoadMore={g.loadMore}
-            >
-                <Blog posts={items} theme={theme} />
-            </InfiniteScroll>
 
-            {/* Loading spinner. */}
-            {g.isLoading && (
-                <div className="spinner">
-                <FaCog/>
-                </div>
-            )}
-
-            {/* Fallback to Pagination for non JS users. */} 
-            <noscript>
-                <style> 
-                {`.spinner { display: none !important; }`}
-                </style>
-                <Pagination pageContext={pageContext} theme={theme}/>
-            </noscript>
-
-            {/* Fallback to Pagination on error. */}
-            {!g.useInfiniteScroll && (
-                <Pagination pageContext={pageContext} theme={theme}/>
-            )}
-
+            <Blog posts={items} theme={theme} />
             <style jsx>{`
                 @keyframes spinner {
                 to {transform: rotate(360deg);}
@@ -72,7 +51,6 @@ class View extends React.Component {
                 margin-top: 40px;
                 font-size: 60px;
                 text-align: center;
-                display: ${g.useInfiniteScroll ? "block" : "none" };
 
                 :global(svg) {
                     fill: ${theme.color.brand.primaryLight};
@@ -84,8 +62,8 @@ class View extends React.Component {
             `}</style>
 
         </React.Fragment>
-    );
-  }
+        
+    )
 }
 
 export default View

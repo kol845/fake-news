@@ -195,7 +195,7 @@ exports.createPages = ({ graphql, actions }) => {
           const startInclusive = i * postsPerPage;
           const endExclusive = startInclusive + postsPerPage;
           const pagePosts = posts.slice(startInclusive, endExclusive)
-    
+          
           createPaginationJSON(pathSuffix, pagePosts);
           createPage({
             path: `/`+pathSuffix,
@@ -211,3 +211,4 @@ exports.createPages = ({ graphql, actions }) => {
     );
   });
 };
+

@@ -3,57 +3,58 @@ import { FaCalendar } from "react-icons/fa/";
 import { FaTag } from "react-icons/fa/";
 import { FaUser } from "react-icons/fa/";
 import Picture from "gatsby-image";
-import { Link } from "gatsby";
+// import { Link } from "gatsby";
+import {
+  Link
+} from "react-router-dom";
 import PropTypes from "prop-types";
 import React from "react";
 
 const Teaser = props => {
   const {
     theme,
-    post: {
-      excerpt,
-      fields: { slug, prefix },
-      frontmatter: {
-        title,
-        tags,
-        author,
-        cover: {
-          children: [{ fluid }]
-        }
-      }
-    },
-    index
+    post,
   } = props;
-
+  // console.log("TEASER:")
+  // console.log(post)
+  
   return (
     <React.Fragment>
       <li>
-        <Link to={slug} key={slug} className="link">
+        <Link to={{pathname:post.slug, state:{homeScrollY: window.scrollY}}} key={post.slug} className="link">
           <div className="gatsby-image-outer-wrapper">
-            <Picture fluid={fluid} critical={index==0}/>
+            <img 
+              src={post.image_url}
+              alt=""
+              className="gatsby-image-wrapper"
+            />
           </div>
           <h1>
-            {title} <FaArrowRight className="arrow" />
+            {post.headline} <FaArrowRight className="arrow" />
           </h1>
           <p className="meta">
             <span>
-              <FaCalendar size={18} /> {prefix}
+              <FaCalendar size={18} /> {post.creation_date}
             </span>
             {/* <span>
               <FaUser size={18} /> {author}
             </span> */}
-            {tags && tags.map(tag =>
+            {/* {post.frontmatter.tags && post.tags.map(tag =>
               <span key={tag}>
               <FaTag size={18} /> {tag}
               </span>
-            )}
+            )} */}
           </p>
-          <p>{excerpt}</p>
+          <p>{post.excerpt}</p>
         </Link>
       </li>
 
       {/* --- STYLES --- */}
       <style jsx>{`
+        .gatsby-image-wrapper{
+          width:100%;
+          height:100%;
+        }
         :global(.link) {
           width: 100%;
           color: ${theme.text.color.primary};
@@ -71,6 +72,7 @@ const Teaser = props => {
           :global(.gatsby-image-outer-wrapper) {
             border-radius: ${theme.size.radius.default};
             border: 1px solid ${theme.line.color};
+            max-height: 400px;
             overflow: hidden;
           }
           :global(.gatsby-image-outer-wrapper img) {

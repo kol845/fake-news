@@ -1,29 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
-import rehypeReact from "rehype-react";
-import Icons from "../../components/About/WebPresenceIcons";
-import ReImg from "./ReImg";
-import ReTracedSVGGallery from "./ReTracedSVGGallery";
-import { Link } from "gatsby";
 
-const renderAst = new rehypeReact({
-  createElement: React.createElement,
-  components: { "re-icons": Icons , "re-img": ReImg , "re-link": Link, "re-tracedsvg-gallery": ReTracedSVGGallery }
-}).Compiler
+
 
 const Bodytext = props => {
   const { content, theme } = props;
-  const html = props.content.html;
 
   return (
     <React.Fragment>
 
       {/* Render markdown with Custom Components */}
       <div className="bodytext">
-        {renderAst(content.htmlAst)}
+        <img 
+          src={content.image}
+          alt=""
+          className="gatsby-image-wrapper"
+        />
+        {content.text}
       </div>
 
       <style jsx>{`
+        .gatsby-image-wrapper {
+            border-radius: ${theme.size.radius.default};
+            border: 1px solid ${theme.line.color};
+            max-height: 400px;
+            overflow: hidden;
+        }
         .bodytext {
           animation-name: bodytextEntry;
           animation-duration: 0;

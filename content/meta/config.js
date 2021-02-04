@@ -1,23 +1,18 @@
 module.exports = {
-  siteTitle: "Atte Juvonen", // <title>
-  shortSiteTitle: "Atte Juvonen", // <title> ending for posts and pages
-  siteDescription: "Atte Juvonen",
-  siteUrl: "https://www.attejuvonen.fi",
+  siteTitle: "Fake News", // <title>
+  shortSiteTitle: "Fake News", // <title> ending for posts and pages
+  siteDescription: "Fake News created by AI",
+  siteUrl: "https://www.pebo.online",
   // pathPrefix: "",
   siteImage: "preview.jpg",
   siteLanguage: "en",
 
   /* author */
-  authorName: "Atte Juvonen",
+  authorName: "Pebo Hamza",
   authorTwitterAccount: "",
-  authorGithub: "https://github.com/baobabkoodaa",
-  authorStackoverflow: "https://stackexchange.com/users/5678032/atte-juvonen?tab=accounts",
-  authorLinkedin: "https://linkedin.com/in/atte-juvonen-86b886113",
-  authorCodeforces: "https://codeforces.com/profile/baobab",
-  authorYoutube: "https://www.youtube.com/channel/UCfHqfHoSYL0V_fXA_JQkeLw?view_as=subscriber",
-
+  authorGithub: "https://github.com/kol845",
   /* header text */
-  headerTitle: "atte juvonen",
+  headerTitle: "fake news",
   headerSubTitle: "",
 
   /* manifest.json */

@@ -27,7 +27,7 @@ export class GlobalState extends React.Component {
         this.hasMore = this.hasMore.bind(this)
         this.updateState = this.updateState.bind(this)
         this.isInitializing = this.isInitializing.bind(this)
-
+        console.log("COMPONENT HAS CONTRUCTED")
         this.state = {
             /*  items contains posts which should be rendered
              *  items is initialized to 1 page of results, in order to:
@@ -60,11 +60,14 @@ export class GlobalState extends React.Component {
         return (this.state.cursor === 0)
     }
 
-    updateState = (mergeableStateObject) => {
+    updateState = (mergeableStateObject) => { // Only runs initialy and adds the 3 initial articles
+        // console.log("UPDATEING STATE")
+        // console.log(mergeableStateObject)
         this.setState(mergeableStateObject)
     }
 
     componentDidMount() {
+        console.log("COMPONENT HAS LOADED")
         this.setState(state => ({
           isLoading: false, // Allow triggering infinite scroll load
         }))

@@ -1,24 +1,20 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React from "react"
 
 import Teaser from "./Teaser";
+
 
 const Blog = props => {
   const posts = props.posts;
   const theme = props.theme;
-
+  // console.log("POSTS:")
+  // console.log(posts)
   return (
     <React.Fragment>
       <main className="main">
         <ul>
-          {posts.map((post,index) => {
-            const {
-              node,
-              node: {
-                fields: { slug }
-              }
-            } = post;
-            return <Teaser key={slug} post={node} theme={theme} index={index} />;
+          {posts.map((item) => {
+            return <Teaser key={item.slug} post={item} theme={theme}/>;
           })}
         </ul>
       </main>

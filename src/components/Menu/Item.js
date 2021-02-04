@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "gatsby";
+import {
+  Link
+} from "react-router-dom";
 
 const Item = props => {
   const { theme, item: { label, to, icon: Icon } = {}, onClick } = props;

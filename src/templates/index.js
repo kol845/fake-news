@@ -9,7 +9,8 @@ import { ThemeContext } from "../layouts";
 class IndexPage extends React.Component {
 
   render() {
-
+    // console.log("PAGE CONTEXT")
+    // console.log(this.props.pageContext)
     return (
       <GlobalStateContext.Consumer>
         {g => (
@@ -17,7 +18,7 @@ class IndexPage extends React.Component {
               <ThemeContext.Consumer>
                 {theme =>
                   <React.Fragment>
-                    <Seo pageTitle="Blog home"/>
+                    <Seo pageTitle="Home"/>
                     <View globalState={g} pageContext={this.props.pageContext} theme={theme} />
                   </React.Fragment>
                 }
