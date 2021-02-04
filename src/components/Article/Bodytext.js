@@ -12,7 +12,7 @@ const Bodytext = props => {
       {/* Render markdown with Custom Components */}
       <div className="bodytext">
         <img 
-          src={content.image}
+          src={content.image_url}
           alt=""
           className="gatsby-image-wrapper"
         />

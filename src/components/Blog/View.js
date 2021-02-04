@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FaCog } from "react-icons/fa/";
+import Loading from "../Loading";
+
 import Blog from "./Blog.js";
 
 /** Template for "home" page with infinite scroll and fallback to pagination. */
@@ -19,12 +20,6 @@ const View = props => {
       }, []);
     useEffect(() => { // Like componentDidUpdate()
         console.log("VIEW UPDATED...")
-        if(mounted){
-            window.scrollTo(0,1) // IF I REMOVE THIS THEN SCROLL WILL BE BUGGY. WHY IS THIS THE CASE REACT!?!?
-            window.requestAnimationFrame(function() {
-              window.scrollTo(0,localStorage.getItem("homeYScroll"))
-            });
-        }
     });
         
 
@@ -33,6 +28,11 @@ const View = props => {
     // console.log(window.scrollY)
     const theme = props.theme
     const items = props.items;
+    // console.log("IN VIEW:")
+    // console.log(props)
+    if(!items){
+        return <Loading theme={props.theme}/>;
+    }
     return(
 
         

@@ -11,11 +11,11 @@ class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.itemList = React.createRef();
-
+    console.log("MENU SAYS")
     this.items = [
       { to: "/", label: "Home", icon: FaHome },
       // { to: "/tags/", label: "Tags", icon: FaTag },
-      { to: "/about/", label: "About", icon: FaUser },
+      // { to: "/about/", label: "About", icon: FaUser },
     ];
 
     this.renderedItems = []; // will contain references to rendered DOM elements of menu
@@ -27,7 +27,6 @@ class Menu extends React.Component {
   };
 
   static propTypes = {
-    path: PropTypes.string.isRequired,
     fixed: PropTypes.bool.isRequired,
     screenWidth: PropTypes.number.isRequired,
     theme: PropTypes.object.isRequired

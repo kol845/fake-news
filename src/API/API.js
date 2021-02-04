@@ -15,6 +15,7 @@ function getAllArticles(callback)
         ))
     ))
 }
+
 export default {
     getAllArticles,
     test

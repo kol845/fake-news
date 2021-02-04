@@ -6,6 +6,7 @@ export default class HTML extends React.Component {
     return (
       <html {...this.props.htmlAttributes}>
         <head>
+          <title>Fake News</title>
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -18,6 +19,7 @@ export default class HTML extends React.Component {
           <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
           <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png" />
+          
         </head>
         <body {...this.props.bodyAttributes}>
           {this.props.preBodyComponents}

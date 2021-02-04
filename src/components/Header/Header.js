@@ -1,9 +1,11 @@
-import { Link } from "gatsby";
+import {
+  Link
+} from "react-router-dom";
 import PropTypes from "prop-types";
 import React from "react";
 import VisibilitySensor from "react-visibility-sensor";
 
-import { ScreenWidthContext } from "../../layouts";
+import { ScreenWidthContext } from "../../layouts/Routes";
 import config from "../../../content/meta/config";
 import Menu from "../Menu";
 
@@ -29,13 +31,15 @@ class Header extends React.Component {
   };
 
   render() {
-    const { path, theme } = this.props;
+    const theme = this.props.theme;
+    const path = this.props.location;
     const { fixed } = this.state;
-
+    // console.log("IN Header:")
+    // console.log(this.props)
     return (
       <React.Fragment>
         <header className={`header ${this.getHeaderSize()}`}>
-          <Link to="/about/" className="logoType">
+          <Link to="/" className="logoType">
             <div className="logo">
               <img src={config.gravatarImgMd5=="" ? avatar : config.gravatarImgMd5 } alt={config.siteTitle} />
             </div>
@@ -245,9 +249,6 @@ class Header extends React.Component {
   }
 }
 
-Header.propTypes = {
-  path: PropTypes.string.isRequired,
-  theme: PropTypes.object.isRequired
-};
+
 
 export default Header;
