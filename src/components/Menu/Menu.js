@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 require("core-js/fn/array/from");
 
-import { FaHome, FaEnvelope, FaTag, FaUser, FaRss, FaBookReader } from "react-icons/fa/";
-
+import { FaHome, FaUserCog } from "react-icons/fa/";
 import Item from "./Item";
 import Expand from "./Expand";
 
@@ -11,10 +10,9 @@ class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.itemList = React.createRef();
-    console.log("MENU SAYS")
     this.items = [
       { to: "/", label: "Home", icon: FaHome },
-      // { to: "/tags/", label: "Tags", icon: FaTag },
+      { to: "/admin", label: "Admin", icon: FaUserCog },
       // { to: "/about/", label: "About", icon: FaUser },
     ];
 

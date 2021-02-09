@@ -1,6 +1,6 @@
 import {
   Link
-} from "react-router-dom";
+} from "gatsby";
 import PropTypes from "prop-types";
 import React from "react";
 import VisibilitySensor from "react-visibility-sensor";
@@ -39,7 +39,11 @@ class Header extends React.Component {
     return (
       <React.Fragment>
         <header className={`header ${this.getHeaderSize()}`}>
-          <Link to="/" className="logoType">
+          <Link 
+            to="/" 
+            className="logoType"
+            state={{ prevPath: location.pathname, refreachScroll:true }}
+          >
             <div className="logo">
               <img src={config.gravatarImgMd5=="" ? avatar : config.gravatarImgMd5 } alt={config.siteTitle} />
             </div>

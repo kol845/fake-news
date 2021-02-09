@@ -1,13 +1,8 @@
 import React from "react";
-import { FaCog } from "react-icons/fa/";
-
 
 import { getScreenWidth } from "../utils/helpers";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+
+import { Router } from "@reach/router"
 
 
 
@@ -90,17 +85,15 @@ class Routes extends React.Component {
 
 
   render() {
-    // console.log("ROUTES SAY:")
-    // console.log(this.state)
+
     return (
         <ThemeContext.Provider value={this.state.theme}>
             <ScreenWidthContext.Provider value={this.state.screenWidth}>
                 <Router>
-                    <Switch>
-                        <RouteWrapper path="/:articleSlug" component={ArticlePage} theme={this.state.theme} items={this.state.items}/>
-                        <RouteWrapper path="/" component={HomePage} theme={this.state.theme} items={this.state.items}/>
-                        <Route component={NotFoundPage} theme={this.state.theme}/>
-                    </Switch>
+                    <RouteWrapper path="/:articleSlug" component={ArticlePage} theme={this.state.theme} items={this.state.items}/>
+                    <RouteWrapper path="/" component={HomePage} theme={this.state.theme} items={this.state.items}/> 
+                    <RouteWrapper path="/admin" component={HomePage} theme={this.state.theme} items={this.state.items} admin={true}/>
+                    <NotFoundPage theme={this.state.theme} default/>
                 </Router>
             </ScreenWidthContext.Provider>
         </ThemeContext.Provider>
@@ -112,45 +105,16 @@ function RouteWrapper({
     component: Component,
     ...props
   }){
-    // 'EXACT' PROBLEMS MAY OCCURE
     return (
-    <Route  path={props.path} exact>
         <Layout location={props.location} items={props.items} theme={props.theme}>
             <Component {...props}/>
         </Layout>
-    </Route>
     );
   }
-let LoadingPage = (props) => (
-    <React.Fragment>
-    <div className="spinner">
-        <FaCog/>
-    </div>
-    <style jsx>{`
-        @keyframes spinner {
-        to {transform: rotate(360deg);}
-        }
-        .spinner {
-        margin-top: 50vh;
-        font-size: 60px;
-        text-align: center;
-
-        :global(svg) {
-            fill: ${this.state.theme.color.brand.primaryLight};
-            animation: spinner 3s linear infinite;
-        }
-        
-        }
-            
-    `}</style>
-  </React.Fragment>
-)
 let HomePage = (props) => (
     <View {...props}></View>
 )
 let ArticlePage = (props) => (
   <Post {...props}></Post>
 )
-
-
 export default Routes;

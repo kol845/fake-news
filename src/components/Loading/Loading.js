@@ -12,7 +12,7 @@ const Loading = (props) => (
         to {transform: rotate(360deg);}
         }
         .spinner {
-        margin-top: 50vh;
+        margin-top: 30%;
         font-size: 60px;
         text-align: center;
 

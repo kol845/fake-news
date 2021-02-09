@@ -1,27 +1,43 @@
 import { FaArrowRight } from "react-icons/fa/";
 import { FaCalendar } from "react-icons/fa/";
-import { FaTag } from "react-icons/fa/";
-import { FaUser } from "react-icons/fa/";
-import Picture from "gatsby-image";
-// import { Link } from "gatsby";
-import {
-  Link
-} from "react-router-dom";
-import PropTypes from "prop-types";
-import React from "react";
 
+import { Link } from "gatsby"
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import Loading from "../Loading"
+
+import api from "../../API"
 const Teaser = props => {
+  const [isLoading, setIsLoading] = useState(false);
+  const stopLoading = (response) =>{
+    // The 'response' is not used. Here could be some error handling in case for example
+    // the backend was not successfull
+    window.location.reload();
+    
+  }
   const {
     theme,
     post,
   } = props;
   // console.log("TEASER:")
   // console.log(post)
-  
+  const onDelete = (event) =>{
+    event.preventDefault();
+    setIsLoading(true);
+    api.deleteArticle(post.id, stopLoading);
+  }
+  if(isLoading){
+    return (<Loading theme={theme}/>)
+  }
   return (
     <React.Fragment>
       <li>
-        <Link to={{pathname:post.slug, state:{homeScrollY: window.scrollY}}} key={post.slug} className="link">
+        <Link 
+          to={post.slug} 
+          key={post.slug} 
+          className="link"
+          state={{ prevPath: location.pathname }}
+        >
           <div className="gatsby-image-outer-wrapper">
             <img 
               src={post.image_url}
@@ -31,29 +47,31 @@ const Teaser = props => {
           </div>
           <h1>
             {post.headline} <FaArrowRight className="arrow" />
+            {props.admin && <button className="delete-article-btn" onClick={onDelete}>Delete Article</button>}
+            
           </h1>
           <p className="meta">
             <span>
               <FaCalendar size={18} /> {post.creation_date}
+              
             </span>
-            {/* <span>
-              <FaUser size={18} /> {author}
-            </span> */}
-            {/* {post.frontmatter.tags && post.tags.map(tag =>
-              <span key={tag}>
-              <FaTag size={18} /> {tag}
-              </span>
-            )} */}
+
           </p>
-          <p>{post.excerpt}</p>
+          
+          <p>
+            {post.excerpt}
+          </p>
+          
         </Link>
+        
       </li>
 
       {/* --- STYLES --- */}
       <style jsx>{`
         .gatsby-image-wrapper{
           width:100%;
-          height:100%;
+          min-height:400px;
+          max-height:600px;
         }
         :global(.link) {
           width: 100%;
@@ -72,8 +90,9 @@ const Teaser = props => {
           :global(.gatsby-image-outer-wrapper) {
             border-radius: ${theme.size.radius.default};
             border: 1px solid ${theme.line.color};
-            max-height: 400px;
+            height: 400px;
             overflow: hidden;
+            width:100%;
           }
           :global(.gatsby-image-outer-wrapper img) {
             z-index: -1;
@@ -108,10 +127,29 @@ const Teaser = props => {
             top: 7px;
           }
         }
-
+        .delete-article-btn{
+          background-color: red;
+          border: 2px solid red;
+          color: white;
+          padding: 6px 12px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          border-radius: ${theme.size.radius.small};
+          font-size: 14px;
+          margin: 12px 2px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+          float:right;
+        }
+        .delete-article-btn:hover{
+          background-color: white;
+          color: black;
+        }
         .meta {
           display: flex;
           flex-flow: row wrap;
+
           font-size: 0.8em;
           padding: ${theme.space.m} ${theme.space.s};
           background: transparent;

@@ -1,20 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Link
-} from "react-router-dom";
+import {  Link } from "gatsby"
 
 const Item = props => {
-  const { theme, item: { label, to, icon: Icon } = {}, onClick } = props;
+  const { theme, item: { label, to, icon: Icon } = {} } = props;
 
   return (
     <React.Fragment>
       <li className={"hiddenItem" in props ? "hiddenItem" : "item"} key={label}>
         <Link
           to={to}
+          state={{ prevPath: location.pathname, refreachScroll:true }}
           className={"hiddenItem" in props ? "inHiddenItem" : ""}
-          onClick={onClick}
-          data-slug={to}
         >
           {Icon && <Icon />} {label}
         </Link>
@@ -100,8 +97,6 @@ const Item = props => {
 
 Item.propTypes = {
   item: PropTypes.object,
-  hidden: PropTypes.bool,
-  onClick: PropTypes.func,
   icon: PropTypes.func,
   theme: PropTypes.object.isRequired
 };

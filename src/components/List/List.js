@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   Link
-} from "react-router-dom";
+} from "gatsby";
 
 const List = props => {
   const { edges, theme } = props;
@@ -20,7 +20,12 @@ const List = props => {
 
           return (
             <li key={slug}>
-              <Link to={slug}>{title}</Link>
+              <Link 
+                to={slug}
+                state={{ prevPath: location.pathname }}
+              >
+                {title}
+              </Link>
             </li>
           );
         })}

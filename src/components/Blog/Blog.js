@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react"
 
 import Teaser from "./Teaser";
+import ArticleCreator from "./ArticleCreator"
 
 
 const Blog = props => {
@@ -12,9 +13,12 @@ const Blog = props => {
   return (
     <React.Fragment>
       <main className="main">
+        
         <ul>
+
+          {props.admin && <ArticleCreator theme={theme}/>}
           {posts.map((item) => {
-            return <Teaser key={item.slug} post={item} theme={theme}/>;
+            return <Teaser key={item.slug} post={item} theme={theme} admin={props.admin}/>;
           })}
         </ul>
       </main>

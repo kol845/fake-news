@@ -16,17 +16,25 @@ const Bodytext = props => {
           alt=""
           className="gatsby-image-wrapper"
         />
-        {content.text}
+        <div className="text">
+          {content.text}
+        </div>
       </div>
 
       <style jsx>{`
         .gatsby-image-wrapper {
             border-radius: ${theme.size.radius.default};
             border: 1px solid ${theme.line.color};
-            max-height: 400px;
+            width:100%;
             overflow: hidden;
         }
+        .text{
+          margin-top:24px;
+          white-space: pre-wrap;
+
+        }
         .bodytext {
+          margin-top:12px;
           animation-name: bodytextEntry;
           animation-duration: 0;
           color: ${theme.color.neutral.gray.j};
