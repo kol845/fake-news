@@ -11,7 +11,9 @@ const View = props => {
         window.requestAnimationFrame(function() {
           window.scrollTo(0,localStorage.getItem("homeYScroll"))
         });
-        props.location.state.refreachScroll = false;
+        if(props.location.state){
+            props.location.state.refreachScroll = false;
+        }
         return () => { // Like componentWillUnmount()
             console.log("VIEW UNMOUNTING...")
             localStorage.setItem("homeYScroll",window.scrollY);
@@ -20,9 +22,12 @@ const View = props => {
       }, []);
     useEffect(() => { // Like componentDidUpdate()
         console.log("VIEW UPDATED...")
-        if(props.location.state.refreachScroll){ // Scroll to top if the navbutton is pressed.
-            window.scrollTo(0,1)
+        if(props.location.state){
+            if(props.location.state.refreachScroll){ // Scroll to top if the navbutton is pressed.
+                window.scrollTo(0,1)
+            }
         }
+
     });
         
 

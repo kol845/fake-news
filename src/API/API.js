@@ -1,6 +1,6 @@
 
 
-let apiRoot = 'http://localhost:5000/api/articles';
+let apiRoot = 'https://fake-ai-news-backend.herokuapp.com/api/articles';
 
 const test = () => {    
     console.log("TESTING")
