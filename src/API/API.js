@@ -1,5 +1,7 @@
 
 
+const fetch = require("node-fetch");
+
 let apiRoot = 'https://fake-ai-news-backend.herokuapp.com/api/articles';
 
 const test = () => {    
