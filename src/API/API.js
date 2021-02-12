@@ -1,6 +1,5 @@
 
-
-require("node-fetch");
+const fetch = require('node-fetch').default;
 
 let apiRoot = 'https://fake-ai-news-backend.herokuapp.com/api/articles';
 
@@ -8,16 +7,17 @@ const test = () => {
     console.log("TESTING")
 };
 
-function getAllArticles(callback){
-    fetch(apiRoot)
+const getAllArticles = async (callback)=>{
+
+    await fetch(apiRoot)
     .then( (response) => (
         response.json().then(data =>(
             callback(data)
         ))
     ))
 }
-function createArticle(data, callback){
-    fetch(apiRoot, {
+const createArticle = async (data, callback)=>{
+    await fetch(apiRoot, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -29,8 +29,8 @@ function createArticle(data, callback){
         ))
     ))
 }
-function deleteArticle(id, callback){
-    fetch(apiRoot+"/"+id, {
+const deleteArticle = async (id, callback)=>{
+    await fetch(apiRoot+"/"+id, {
         method: 'DELETE',
       }).then( (response) => (
         response.json().then(data =>(
