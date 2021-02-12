@@ -22,7 +22,7 @@ const List = props => {
             <li key={slug}>
               <Link 
                 to={slug}
-                state={{ prevPath: location.pathname }}
+                state={{ prevPath: props.location ? props.location.pathname:null }}
               >
                 {title}
               </Link>

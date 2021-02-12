@@ -10,7 +10,7 @@ const Item = props => {
       <li className={"hiddenItem" in props ? "hiddenItem" : "item"} key={label}>
         <Link
           to={to}
-          state={{ prevPath: location.pathname, refreachScroll:true }}
+          state={{ prevPath: props.location ? props.location.pathname:null, refreachScroll:true }}
           className={"hiddenItem" in props ? "inHiddenItem" : ""}
         >
           {Icon && <Icon />} {label}

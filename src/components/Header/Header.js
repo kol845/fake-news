@@ -42,7 +42,7 @@ class Header extends React.Component {
           <Link 
             to="/" 
             className="logoType"
-            state={{ prevPath: path.pathname, refreachScroll:true }}
+            state={{ prevPath: path ? path.location: null, refreachScroll:true }}
           >
             <div className="logo">
               <img src={config.gravatarImgMd5=="" ? avatar : config.gravatarImgMd5 } alt={config.siteTitle} />

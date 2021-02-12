@@ -36,7 +36,7 @@ const Teaser = props => {
           to={post.slug} 
           key={post.slug} 
           className="link"
-          state={{ prevPath: location.pathname }}
+          state={{ prevPath: props.location ? props.location.pathname : null }}
         >
           <div className="gatsby-image-outer-wrapper">
             <img 
